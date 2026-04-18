@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - '**/*.zip'
+      - '!toolkit.zip'
   workflow_dispatch:
 
 permissions:
@@ -44,7 +45,6 @@ jobs:
           REPOSITORY = os.environ["REPOSITORY"]
           BRANCH = os.environ["BRANCH"]
 
-          # Expected: <repo>-<anything>_<40hex>.zip
           ZIP_RE = re.compile(r"^(?P<prefix>.+)_(?P<commit>[0-9a-f]{40})\.zip$")
 
           def utc_now_iso() -> str:
@@ -61,8 +61,6 @@ jobs:
               return f"https://raw.githubusercontent.com/{REPOSITORY}/{encoded_branch}/{encoded_path}"
 
           def derive_repo_name(prefix: str) -> str:
-              # governance-main -> governance
-              # audiomason2-main -> audiomason2
               repo_name = prefix.split("-", 1)[0]
               if not repo_name:
                   raise SystemExit(f"Cannot derive repository name from prefix: {prefix}")
@@ -78,6 +76,9 @@ jobs:
           for path in zip_paths:
               rel = path.relative_to(ROOT)
               basename = path.name
+
+              if basename == "toolkit.zip":
+                  continue
 
               m = ZIP_RE.fullmatch(basename)
               if not m:
