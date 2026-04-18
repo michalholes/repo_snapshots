@@ -122,14 +122,15 @@ jobs:
 
       - name: Commit and push manifest if changed
         run: |
-          if git diff --quiet -- repo_snapshot_manifest.json; then
-            echo "Manifest unchanged"
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add repo_snapshot_manifest.json
+
+          if git diff --cached --quiet --exit-code; then
+            echo "Manifest unchanged"
+            exit 0
+          fi
+
           git commit -m "chore: update repo snapshot manifest [skip ci]"
           git push
