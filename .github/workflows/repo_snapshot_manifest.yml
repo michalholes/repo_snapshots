@@ -16,6 +16,10 @@ concurrency:
   group: repo-snapshot-manifest-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  MANIFEST_NAME: repo_snapshot_manifest.json
+  MANIFEST_PUBLISH_MAX_ATTEMPTS: "5"
+
 jobs:
   generate-manifest:
     runs-on: ubuntu-latest
@@ -23,14 +27,26 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
-      - name: Generate repo_snapshot_manifest.json
+      - name: Generate and publish repo_snapshot_manifest.json
+        shell: bash
         env:
-          MANIFEST_NAME: repo_snapshot_manifest.json
           REPOSITORY: ${{ github.repository }}
           BRANCH: ${{ github.ref_name }}
         run: |
-          python3 - <<'PY'
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          for attempt in $(seq 1 "$MANIFEST_PUBLISH_MAX_ATTEMPTS"); do
+            git fetch origin "$BRANCH"
+            git reset --hard "origin/$BRANCH"
+            git clean -fd
+
+            python3 - <<'PY'
           from __future__ import annotations
 
           import json
@@ -80,15 +96,15 @@ jobs:
               if basename == "toolkit.zip":
                   continue
 
-              m = ZIP_RE.fullmatch(basename)
-              if not m:
+              match = ZIP_RE.fullmatch(basename)
+              if not match:
                   raise SystemExit(
                       f"Unexpected ZIP filename: {rel.as_posix()}\n"
                       "Expected pattern: <repo>-<ref>_<40-hex-commit>.zip"
                   )
 
-              prefix = m.group("prefix")
-              source_commit = m.group("commit")
+              prefix = match.group("prefix")
+              source_commit = match.group("commit")
               repo_name = derive_repo_name(prefix)
 
               if repo_name in targets:
@@ -117,20 +133,27 @@ jobs:
               json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
               encoding="utf-8",
           )
+
           print(f"Wrote {output.name} with {len(targets)} target(s)")
           PY
 
-      - name: Commit and push manifest if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add "$MANIFEST_NAME"
 
-          git add repo_snapshot_manifest.json
+            if git diff --cached --quiet --exit-code; then
+              echo "Manifest unchanged."
+              exit 0
+            fi
 
-          if git diff --cached --quiet --exit-code; then
-            echo "Manifest unchanged"
-            exit 0
-          fi
+            git commit -m "chore: update repo snapshot manifest [skip ci]"
 
-          git commit -m "chore: update repo snapshot manifest [skip ci]"
-          git push
+            if git push origin "HEAD:$BRANCH"; then
+              echo "Manifest published on attempt ${attempt}."
+              exit 0
+            fi
+
+            echo "Manifest publish race detected; retrying attempt ${attempt}/${MANIFEST_PUBLISH_MAX_ATTEMPTS}."
+            sleep "$((attempt * 2))"
+          done
+
+          echo "Manifest publish failed after ${MANIFEST_PUBLISH_MAX_ATTEMPTS} attempts."
+          exit 1
