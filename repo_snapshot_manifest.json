@@ -2,22 +2,22 @@
   "schema_version": 1,
   "repository": "michalholes/repo_snapshots",
   "branch": "main",
-  "generated_at": "2026-05-18T09:33:17Z",
+  "generated_at": "2026-05-18T09:40:43Z",
   "targets": {
     "audiomason2": {
-      "basename": "audiomason2-main_a120d5b7526bc7e1dd68d68c952e11a442a19da9.zip",
-      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/audiomason2-main_a120d5b7526bc7e1dd68d68c952e11a442a19da9.zip",
-      "source_commit": "a120d5b7526bc7e1dd68d68c952e11a442a19da9"
+      "basename": "audiomason2-main_963575eefcbe9aed9009dee9e590e48b10fabc1d.zip",
+      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/audiomason2-main_963575eefcbe9aed9009dee9e590e48b10fabc1d.zip",
+      "source_commit": "963575eefcbe9aed9009dee9e590e48b10fabc1d"
     },
     "governance": {
-      "basename": "governance-main_6f529a9e098f3e0e68fb8276d732ff896cf209e3.zip",
-      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/governance-main_6f529a9e098f3e0e68fb8276d732ff896cf209e3.zip",
-      "source_commit": "6f529a9e098f3e0e68fb8276d732ff896cf209e3"
+      "basename": "governance-main_38f6679ae671d73a761111e2ad8555fbff2262ee.zip",
+      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/governance-main_38f6679ae671d73a761111e2ad8555fbff2262ee.zip",
+      "source_commit": "38f6679ae671d73a761111e2ad8555fbff2262ee"
     },
     "patchhub": {
-      "basename": "patchhub-main_fbe272e453c55214bf226739a502e231192faa20.zip",
-      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/patchhub-main_fbe272e453c55214bf226739a502e231192faa20.zip",
-      "source_commit": "fbe272e453c55214bf226739a502e231192faa20"
+      "basename": "patchhub-main_e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf.zip",
+      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/patchhub-main_e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf.zip",
+      "source_commit": "e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf"
     }
   }
 }
