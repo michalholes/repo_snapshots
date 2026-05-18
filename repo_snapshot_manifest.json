@@ -2,7 +2,7 @@
   "schema_version": 1,
   "repository": "michalholes/repo_snapshots",
   "branch": "main",
-  "generated_at": "2026-05-18T10:37:42Z",
+  "generated_at": "2026-05-18T10:37:51Z",
   "targets": {
     "audiomason2": {
       "basename": "audiomason2-main_efe00ae6f046c202a32d38642bd0609c9a2e8529.zip",
@@ -15,9 +15,9 @@
       "source_commit": "50f47c50153d0b41579f48d44f90a9d98aeec64f"
     },
     "patchhub": {
-      "basename": "patchhub-main_e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf.zip",
-      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/patchhub-main_e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf.zip",
-      "source_commit": "e6ac7c839a3284d0e4d41f708eaf92ef1de0a3cf"
+      "basename": "patchhub-main_309b2e92028f3ef1dc146a0d27c3c5f94bc5dba9.zip",
+      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/patchhub-main_309b2e92028f3ef1dc146a0d27c3c5f94bc5dba9.zip",
+      "source_commit": "309b2e92028f3ef1dc146a0d27c3c5f94bc5dba9"
     }
   }
 }
