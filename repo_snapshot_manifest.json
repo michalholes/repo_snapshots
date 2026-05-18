@@ -2,12 +2,12 @@
   "schema_version": 1,
   "repository": "michalholes/repo_snapshots",
   "branch": "main",
-  "generated_at": "2026-05-18T11:09:00Z",
+  "generated_at": "2026-05-18T11:09:14Z",
   "targets": {
     "audiomason2": {
-      "basename": "audiomason2-main_bfac0f2a26d79e5ba38be83975f159e6230a82f9.zip",
-      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/audiomason2-main_bfac0f2a26d79e5ba38be83975f159e6230a82f9.zip",
-      "source_commit": "bfac0f2a26d79e5ba38be83975f159e6230a82f9"
+      "basename": "audiomason2-main_892d74ee60dfe0bd74580560551720d850be0eaa.zip",
+      "raw_url": "https://raw.githubusercontent.com/michalholes/repo_snapshots/main/audiomason2-main_892d74ee60dfe0bd74580560551720d850be0eaa.zip",
+      "source_commit": "892d74ee60dfe0bd74580560551720d850be0eaa"
     },
     "governance": {
       "basename": "governance-main_d7dfa247233f2829d840d2d09b7624bb394b7585.zip",
